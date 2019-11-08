@@ -1,0 +1,13 @@
+{
+  "ONBOARDING_MESSAGE": "Welcome to Study Buddy! I'll ask you questions to help you build your Computer Science knowledge. I can ask about Data Structures, Algorithms, and Object Oriented Programming. What do you want to learn?",
+  "GENERIC_REPROMPT": "Sorry, I didn't catch that. Do you want to learn about Data Structures, Algorithms, or Object Oriented Programming?",
+  "HELP_MESSAGE": "Study Buddy helps you practice Computer Science concepts by asking you questions. I can ask about Data Structures, Algorithms, or Object Oriented Programming. You can also check your score at any time. What do you want to learn?",
+  "FALLBACK_MESSAGE": "Hm, I'm not sure about that. Do you want to study Data Structures, Algorithms, or Object Oriented Programming?",
+  "EXIT_MESSAGE": "Great studying today! See you next time!",
+  "ERROR_MESSAGE": "Oh no, something went wrong. Try again later.",
+  "CONFIRM_QUIZ_TYPE": "Great! Let's practice {quizType}! First question: <break time=\"300ms\"/>",
+  "CORRECT_ANSWER": "That's correct! ",
+  "INCORRECT_ANSWER": "Sorry, {response} is not correct. The correct answer is {answer}. ",
+  "NEXT_QUESTION": "Next question: ",
+  "COMPLETED_QUIZ": "You've completed all the {quizType} questions! Great work! See you next time."
+}

@@ -1,0 +1,32 @@
+{
+    "DATA_STRUCTURES" : [
+        {
+            "PROMPT": "Which data structure has a fixed size:<break time=\"300ms\"/> A linked list. Hash map. Array. Or Set.",
+            "ANSWER": "array"
+        },
+        {
+            "PROMPT": "Which data structure follows the order \"First In, Last Out\":<break time=\"300ms\"/> An Array. Hash map. Queue. Or Stack.",
+            "ANSWER": "stack"
+        }
+    ],
+    "OOP" : [
+        {
+            "PROMPT": "Which <say-as interpret-as=\"characters\">OOP</say-as> concept is analagous to a blueprint for a car:<break time=\"300ms\"/> Polymorphism. Class. Object. Or Encapsulation.",
+            "ANSWER": "class"
+        },
+        {
+            "PROMPT": "Which method is <emphasis level=\"strong\">not</emphasis> part of the Java Object class:<break time=\"300ms\"/> equals. hashCode. toString. Or deepCopy.",
+            "ANSWER": "deepCopy"
+        }
+    ],
+    "ALGS" : [
+        {
+            "PROMPT": "Which problem is an example of an \"NP-hard\" problem:<break time=\"300ms\"/> Sorting an array. Edit Distance. Travelling Salesman. Or Oh One Knapsack.",
+            "ANSWER": "travelling salesman"
+        },
+        {
+            "PROMPT": "Which algorithm would be best suited for finding a path through a maze:<break time=\"300ms\"/> Breadth First Search. Depth First Search. Dijkstra's Algorithm. Or Binary Search.",
+            "ANSWER": "depth first search"
+        }
+    ]
+}
