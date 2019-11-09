@@ -1,6 +1,6 @@
 # Study Buddy
 
-An Alexa Skill for studying Computer Science.
+An Alexa Skill that helps you study Computer Science concepts.
 
 ## About this skill
 
