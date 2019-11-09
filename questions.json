@@ -16,17 +16,17 @@
         },
         {
             "PROMPT": "Which method is <emphasis level=\"strong\">not</emphasis> part of the Java Object class:<break time=\"300ms\"/> equals. hashCode. toString. Or deepCopy.",
-            "ANSWER": "deepCopy"
+            "ANSWER": "deep copy"
         }
     ],
     "ALGS" : [
         {
             "PROMPT": "Which problem is an example of an \"NP-hard\" problem:<break time=\"300ms\"/> Sorting an array. Edit Distance. Travelling Salesman. Or Oh One Knapsack.",
-            "ANSWER": "travelling salesman"
+            "ANSWER": "traveling salesman"
         },
         {
             "PROMPT": "Which algorithm would be best suited for finding a path through a maze:<break time=\"300ms\"/> Breadth First Search. Depth First Search. Dijkstra's Algorithm. Or Binary Search.",
-            "ANSWER": "depth first search"
+            "ANSWER": "depth 1st search"
         }
     ]
 }

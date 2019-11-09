@@ -11,6 +11,9 @@ const quizTypeMap = {
     "algorithms": "ALGS"
 }
 
+/**
+ * Handler for LaunchRequest. Welcomes the user when they open the skill.
+ */
 const LaunchHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -26,11 +29,16 @@ const LaunchHandler = {
 
 /**
  * Returns the question from questionMap matching the type and request number.
+ * @param quizType type of quiz, either "data structures", "object oriented programming", "algorithms"
+ * @param questionIndex index of the desired question. The first question is index 0.
  */
-const getQuestion = (quizType, count) => {
-    return questions[quizTypeMap[quizType]][count];
+const getQuestion = (quizType, questionIndex) => {
+    return questions[quizTypeMap[quizType]][questionIndex];
 };
 
+/**
+ * Handler for StartQuizIntent. Begins the type of quiz that the user selected.
+ */
 const StartQuizIntentHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -38,9 +46,12 @@ const StartQuizIntentHandler = {
         request.intent.name === 'StartQuizIntent';
   },
   handle(handlerInput) {
+    // Get the type of quiz that the user selected.  
     const quizType = Alexa.getSlotValue(handlerInput.requestEnvelope, 'quizType');
+    // Get the first question for that quiz type.
     const question = getQuestion(quizType, 0);
     
+    // Add data to the session attributes. These will be used by AnswerIntentHandler to verify the answer.
     const sessionAttributes = handlerInput.attributesManager.setSessionAttributes({
         'quizType': quizType,
         'expectedAnswer': question.ANSWER
@@ -54,16 +65,24 @@ const StartQuizIntentHandler = {
   },
 };
 
-const getResultSpeech = (response, expectedAnswer) => {
+/**
+ * Returns speech telling user if their answer was correct or not.
+ * @param userResponse user's answer to the question
+ * @param expectedAnswer correct answer to the question
+ */ 
+const getResultSpeech = (userResponse, expectedAnswer) => {
     let resultSpeech;
-    if (response === expectedAnswer) {
+    if (userResponse === expectedAnswer) {
         resultSpeech = speechMap.CORRECT_ANSWER;
     } else {
-        resultSpeech = speechMap.INCORRECT_ANSWER.replace('{response}', response).replace('{answer}', expectedAnswer);
+        resultSpeech = speechMap.INCORRECT_ANSWER.replace('{response}', userResponse).replace('{answer}', expectedAnswer);
     }
     return resultSpeech;
 };
 
+/**
+ * Handler for AnswerIntent. Verifies user's answer, then either asks another or exits the skill.
+ */
 const AnswerIntentHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -72,21 +91,27 @@ const AnswerIntentHandler = {
   },
   handle(handlerInput) {
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-    const response = Alexa.getSlotValue(handlerInput.requestEnvelope, 'answer');
-    const expectedAnswer = _.get(sessionAttributes, "expectedAnswer", "not available");
-    const resultSpeech = getResultSpeech(response, expectedAnswer);
     
+    // Verify user's response.
+    const userResponse = Alexa.getSlotValue(handlerInput.requestEnvelope, 'answer');
+    const expectedAnswer = _.get(sessionAttributes, "expectedAnswer", "not available");
+    const resultSpeech = getResultSpeech(userResponse, expectedAnswer);
+    
+    // Retrieve quizType so next question has the same type.
     const quizType = _.get(sessionAttributes, "quizType", "data structures")
     
+    // Increment number-of-questions-answered counter. If 2, exit the skill.
     const numQuestionsAnswered = _.get(sessionAttributes, "numQuestionsAnswered", 0) + 1;
     if (numQuestionsAnswered >= max_num_questions) {
         return handlerInput.responseBuilder
             .speak(resultSpeech + speechMap.COMPLETED_QUIZ.replace('{quizType}', quizType))
             .getResponse();
     } else {
+        // Save numQuestionsAnswered to sessionAttributes so it can be retrieved later.
         _.set(sessionAttributes, "numQuestionsAnswered", numQuestionsAnswered);
-        const question = getQuestion(quizType, numQuestionsAnswered);
         
+        // Get next question and update expectedAnswer.
+        const question = getQuestion(quizType, numQuestionsAnswered);
         _.set(sessionAttributes, "expectedAnswer", question.ANSWER);
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
         
@@ -100,6 +125,9 @@ const AnswerIntentHandler = {
   },
 };
 
+/**
+ * Handler for HelpIntent. Reminds user of the skill's functionality and guides them back to the right path.
+ */
 const HelpHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -107,7 +135,6 @@ const HelpHandler = {
       request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
     return handlerInput.responseBuilder
       .speak(speechMap.HELP_MESSAGE)
       .reprompt(speechMap.GENERIC_REPROMPT)
@@ -115,6 +142,9 @@ const HelpHandler = {
   },
 };
 
+/**
+ * Handler for FallbackIntent. Helps user when they've said something the skill doesn't support.
+ */
 const FallbackHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -122,7 +152,6 @@ const FallbackHandler = {
       request.intent.name === 'AMAZON.FallbackIntent';
   },
   handle(handlerInput) {
-    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
     return handlerInput.responseBuilder
       .speak(speechMap.FALLBACK_MESSAGE)
       .reprompt(speechMap.GENERIC_REPROMPT)
@@ -130,6 +159,9 @@ const FallbackHandler = {
   },
 };
 
+/**
+ * Handler for CancelIntent and StopIntent. Says goodbye to the user and exits the skill.
+ */
 const ExitHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -138,13 +170,15 @@ const ExitHandler = {
         request.intent.name === 'AMAZON.StopIntent');
   },
   handle(handlerInput) {
-    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
     return handlerInput.responseBuilder
       .speak(speechMap.STOP_MESSAGE)
       .getResponse();
   },
 };
 
+/**
+ * Handler for SessionEndedRequest. Logs why the session ended. Helpful for debugging.
+ */
 const SessionEndedRequestHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -156,6 +190,9 @@ const SessionEndedRequestHandler = {
   },
 };
 
+/**
+ * Generic error handler. Informs user that an error has occurred and exits skill. Logs the error for debugging.
+ */
 const ErrorHandler = {
   canHandle() {
     return true;
@@ -163,7 +200,6 @@ const ErrorHandler = {
   handle(handlerInput, error) {
     console.log(`Error handled: ${error.message}`);
     console.log(`Error stack: ${error.stack}`);
-    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
     return handlerInput.responseBuilder
       .speak(speechMap.ERROR_MESSAGE)
       .getResponse();
@@ -172,6 +208,9 @@ const ErrorHandler = {
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
+/**
+ * Setup for the skill. All new handlers must be added in addRequestHandlers.
+ */ 
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchHandler,  
