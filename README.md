@@ -4,7 +4,7 @@ An Alexa Skill that helps you study Computer Science concepts.
 
 ## About this skill
 
-Study Buddy is a simple skill originally presented at [CANCWIC 2019](https://www.can-cwic.ca/) as part of an Intro to Voice workshop.
+Study Buddy is a simple skill originally presented at [CANCWIC 2019](https://www.can-cwic.ca/) as part of an Intro to Voice workshop. Slides are available [here](https://docs.google.com/presentation/d/1yTlBT9nWSJrqNYFfMEF2mTiQ4ufl7f0zsnbtKBmlxxs/edit?usp=sharing).
 
 ## Setup
 
