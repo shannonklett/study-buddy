@@ -11,6 +11,6 @@
   "dependencies": {
     "ask-sdk-core": "2.7.0",
     "ask-sdk-model": "^1.0.0",
-    "lodash": "4.17.15"
+    "lodash": "4.17.19"
   }
 }
