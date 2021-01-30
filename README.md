@@ -8,15 +8,10 @@ Study Buddy is a simple skill originally presented at [CANCWIC 2019](https://www
 
 ## Setup
 
-Follow the steps from [Build An Alexa-Hosted Fact Skill](https://github.com/alexa/skill-sample-nodejs-fact/blob/master/instructions/setup-vui-alexa-hosted.md) to create a skill.
+Follow the steps from [Import an Alexa-hosted skill from a public Git project](https://developer.amazon.com/en-US/docs/alexa/hosted-skills/alexa-hosted-skills-git-import.html#import) to create a skill with the code in this repository.
 
-1. When you get to **Step 7** on the first page, copy the interaction from [model.json](https://github.com/shannonklett/study-buddy/blob/master/model.json) instead.
-1. For **Deploying Skill Code**, copy over the files from this repo:
-
-            * index.js
-            * package.json
-            * questions.json
-            * speechMap.json
+1. For **Step 1** you will need to create an Amazon developer account if you do not already have one.
+1. For **Step 9**, use https://github.com/shannonklett/study-buddy.git
             
 ## Learn more about Voice 
 
