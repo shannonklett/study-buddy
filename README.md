@@ -12,6 +12,12 @@ Follow the steps from [Import an Alexa-hosted skill from a public Git project](h
 
 1. For **Step 1** you will need to create an Amazon developer account if you do not already have one.
 1. For **Step 9**, use https://github.com/shannonklett/study-buddy.git
+1. Update the Invocation Name to "study buddy" or similar. This is how you will open the skill, ie "Alexa, open study buddy."
+1. Tap "Save Model" and then "Build Model". Wait a minute or two for it to finish.
+1. Tap the "Test" tab at the top.
+1. Switch "Skill testing is enabled in:" to "Development".
+1. Click and hold the mic button and say "Alexa, open study buddy."
+1. This should start your skill. Well done!
             
 ## Learn more about Voice 
 
