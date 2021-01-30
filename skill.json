@@ -1,0 +1,62 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Test yourself on your Computer Programming knowledge",
+          "examplePhrases": [
+            "Alexa open Study Buddy",
+            "Alexa, ask Study Buddy to start my Data Structures quiz",
+            ""
+          ],
+          "keywords": [
+            "trivia",
+            "computer",
+            "study"
+          ],
+          "name": "Study Buddy",
+          "description": "To start, just say \"Alexa, launch Study Buddy\" or \"Alexa, open Study Buddy\".\n\nAt anytime, you can stop by saying \"Alexa, stop\"",
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        }
+      },
+      "automaticDistribution": {
+        "isActive": false
+      },
+      "isAvailableWorldwide": true,
+      "category": "KNOWLEDGE_AND_TRIVIA",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:759030116850:function:633f8abb-24e6-4308-92d0-330f59504915:Release_0"
+        },
+        "interfaces": [],
+        "regions": {
+          "EU": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:eu-west-1:759030116850:function:633f8abb-24e6-4308-92d0-330f59504915:Release_0"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:759030116850:function:633f8abb-24e6-4308-92d0-330f59504915:Release_0"
+            }
+          },
+          "FE": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-west-2:759030116850:function:633f8abb-24e6-4308-92d0-330f59504915:Release_0"
+            }
+          }
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "locales": {
+        "en-US": {}
+      }
+    }
+  }
+}
